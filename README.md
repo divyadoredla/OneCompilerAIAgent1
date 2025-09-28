@@ -1,49 +1,143 @@
-AI Automation Agent
+Aurora Compile:
+Aurora Compile is a browser-first web compiler and IDE for HTML, CSS, and JavaScript. It provides a seamless development experience with a powerful code editor, live preview, project management, and an integrated AI assistant to help you code smarter and faster.
 
-An AI-powered automation agent that takes natural language instructions, uses Gemini for understanding, and executes tasks via browser automation (Playwright).
+- Core Features
+Web IDE (index.html)
+Powerful Code Editor: Built with Monaco Editor (the engine behind VS Code) for a rich editing experience with syntax highlighting, autocompletion, and bracket pair colorization.
 
-This project was built for a hackathon with the aim to make coding smarter, faster, and autonomous.
+Live Preview: Instantly see your changes in a preview pane with hot-reloading.
 
-🚀 Features
+Responsive Device Testing: Test your creations on desktop, tablet, and mobile viewports.
 
-Natural Language to Actions → Type queries like “Search laptops under 50k and list top 5.”
+File Management: A simple file tree to create, open, and delete files within your project.
 
-Browser Automation → Automatically searches Google and extracts results.
+Project Templates: Start quickly with pre-built templates for a blank project, a vanilla SPA, a React CDN app, or a landing page.
 
-Code Debugging → Detects errors and suggests fixes.
+Client-Side Compilation: All HTML, CSS, and JS are compiled in the browser for the live preview.
 
-Code Conversion → Converts code between programming languages.
+Export Project: Download your entire project as a .zip file, ready for deployment.
 
-Interactive Chat UI → Clean interface to chat with the AI Agent.
+Persistent Projects: Your work is automatically saved to localStorage, so you can pick up right where you left off.
 
-🏗️ Architecture flowchart TD A[User Query - Frontend] --> B[Flask Backend] B --> C[Gemini AI - Task Understanding] C --> D{Router} D -->|Search| E[Playwright Automation] D -->|Debug| F[Gemini Debugging] D -->|Convert| G[Gemini Conversion] E & F & G --> H[Structured Output] H --> I[Frontend Display]
+AI Chatbot (chatbot.html)
+Modern Interface: A sleek, futuristic chat UI for interacting with the AI.
 
-🛠️ Tech Stack
+AI-Powered Assistance: Ask coding questions, get explanations, and receive suggestions.
 
-Frontend: HTML, CSS, JavaScript
+Backend Integration: Connects to a backend server to process requests with powerful language models like GPT-4o-mini.
 
-Backend: Flask (Python)
+Click-and-Go: Accessible via a cool, draggable logo icon on the main IDE page.
 
-AI Model: Gemini 1.5 Flash (Google AI Studio)
+- Tech Stack
+Frontend:
 
-Automation: Playwright
+HTML5, CSS3, Vanilla JavaScript (ES6+)
 
-Deployment: Localhost / GitHub
+Monaco Editor: The core code editor.
 
-Example Use Cases
+JSZip: For exporting projects.
 
-Search laptops under 50k and list top 5 → Returns a structured list.
+Backend (Node.js):
 
-Why is my Python code failing? → Returns explanation + corrected code.
+Node.js / Express: Serves static files and acts as a proxy for the AI chatbot.
 
-Convert factorial code from Python to Java → Returns translated code.
+dotenv: For managing environment variables.
 
-Future Scope
+Alternative Backend (Python):
 
-Auto test-case generation for user code.
+Flask / CORS: A Python-based server for local AI and web automation.
 
-Code optimization suggestions.
+LangChain / Ollama: To run Large Language Models (like Llama 3) locally.
 
-Integration directly into OneCompiler or IDE.
+Selenium: For browser automation tasks (Web Agent).
 
-Team Name : AI Coders Team Leader : D.Divya Sri Team Mates : M.Chandu Naga Sowmya : S.Teja : Kavitha : poornima
+- Getting Started
+This project is primarily a frontend application but includes a backend to power the AI chatbot. You have two backend options provided.
+
+Prerequisites
+Node.js and npm: Required for the Node.js backend. Download here.
+
+Python and pip: (Optional) Required for the Python backend. Download here.
+
+Ollama: (Optional) Required if you want to run the AI model locally with the Python backend. Download here.
+
+Installation & Setup
+Clone the repository:
+
+Bash
+
+git clone <your-repository-url>
+cd <repository-directory>
+Choose Your Backend:
+
+Option 1: Node.js Backend (Recommended for Chatbot)
+This server will serve your files and proxy requests to the OpenAI API. The provided chatbot.js is pre-configured to work with this server.
+
+a. Install dependencies:
+
+Bash
+
+npm install
+b. Create a .env file in the root directory and add your OpenAI API key:
+
+OPENAI_API_KEY=your_openai_api_key_here
+c. Start the server:
+
+Bash
+
+npm start
+The server will be running at http://localhost:3000.
+
+Option 2: Python Flask Backend (For Local LLM & Web Agent)
+This server uses a locally running Ollama model for chat and Selenium for browser automation.
+
+a. Install Python dependencies:
+
+Bash
+
+pip install Flask flask_cors requests langchain_ollama selenium webdriver-manager
+b. Install and run a local LLM with Ollama:
+
+Bash
+
+# Pull the llama3 model
+ollama pull llama3
+
+# Keep this running in a separate terminal
+ollama run llama3
+c. Start the Flask server:
+
+Bash
+
+python app.py
+The server will be running at http://localhost:5000.
+
+Note: If you use this backend, you must update the fetch URL in chatbot.js from http://localhost:3000/api/chat to http://localhost:5000/api/generate.
+
+Launch the Application:
+
+If you are running the Node.js server, simply navigate to http://localhost:3000 in your browser.
+
+If you are not running a server, you can open the index.html file directly in your browser. The IDE will work, but the chatbot will not.
+
+- Project Structure
+.
+├── index.html          # Main IDE interface
+├── style.css           # Styles for the IDE
+├── script.js           # Core logic for the IDE
+│
+├── chatbot.html        # AI chatbot interface
+├── chatbot.css         # Styles for the chatbot
+├── chatbot.js          # Logic for the chatbot
+│
+├── logo-drag.js        # Script for the draggable logo
+├── icon.png            # The draggable logo image
+│
+├── server.js           # Node.js backend for proxying OpenAI
+├── package.json        # Node.js dependencies and scripts
+│
+├── app.py              # (Alternative) Python backend with Ollama and Selenium
+│
+└── README.md           # This file
+License
+This project is licensed under the ISC License. See the package.json file for details.
